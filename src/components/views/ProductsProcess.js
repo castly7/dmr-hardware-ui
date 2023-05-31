@@ -136,7 +136,7 @@ const Products = () => {
                 <label htmlFor="name" className="p-d-block ml-3">Ürün Fiyat</label>
                 <span className="p-float-label">
                     <InputText id="username" className="m-2 w-16rem" placeholder="Ürün Fiyatı Giriniz..."
-                               value={productsPrice} placeholder="Ürün Fiyatı"
+                               value={productsPrice} placeHolder="Ürün Fiyatı"
                                onChange={(e) => setProductsPrice(e.target.value)}
                     />
                 </span>
@@ -148,7 +148,7 @@ const Products = () => {
                 <label htmlFor="name" className="p-d-block ml-3">Ürün Açıklaması</label>
                 <span className="p-float-label">
                     <InputTextarea id="username" className="m-2 w-16rem" placeholder="Ürün Açıklaması Giriniz..."
-                               value={productsDetail} placeholder="Ürün Açıklaması Giriniz" rows={3}
+                               value={productsDetail} placeHolder="Ürün Açıklaması Giriniz" rows={3}
                                onChange={(e) => setProductsDetail(e.target.value)}
                     />
                 </span>
