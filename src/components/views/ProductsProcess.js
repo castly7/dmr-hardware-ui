@@ -9,7 +9,7 @@ import {Column} from "primereact/column";
 import {ProductsService} from "../service/ProductsService";
 
 
-const Products = () => {
+const ProductsProcess = () => {
 
     const toast = useRef(null);
     const [isUpdate, setIsUpdate] = useState(false);
@@ -30,7 +30,7 @@ const Products = () => {
     }, []);
 
     const getAllProducts = async () => {
-        const response = await productsService.getAll();
+        const response = await productsService.getAll();  //getById
         if (response.success) {
             setProductsList(response.object)
         }
@@ -191,4 +191,4 @@ const Products = () => {
 )
 }
 
-export default Products;
+export default ProductsProcess;
