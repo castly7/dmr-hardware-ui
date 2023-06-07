@@ -17,7 +17,8 @@ const ProductsProcess = () => {
 
     const productService = new ProductsService();
 
-    const [category, setCategory] = useState(null);
+    const [categoryId, setCategoryId] = useState(null);
+    const [selectedValue, setSelectedValue] = useState("");
     const [productsName, setProductsName] = useState(null);
     const [productsModel, setProductsModel] = useState(null);
     const [productsPrice, setProductsPrice] = useState(null);
@@ -36,9 +37,26 @@ const ProductsProcess = () => {
         }
     }*/
 
+    const categories = [
+        { id: 1, label: 'Klozet Grubu' , value:'closet' },
+        { id: 2, label: 'Boya Grubu' , value:'paint' },
+        { id: 3, label: 'Vana Grubu' , value:'valve' },
+        { id: 4, label: 'Duş Grubu' , value:'shower' },
+        { id: 5, label: 'Hırdavat Grubu' , value:'tools' },
+        { id: 6, label: 'Elektirik Grubu' , value:'electric' },
+        { id: 7, label: 'Vitrifiye Grubu' , value:'vitrifiye' },
+        { id: 8, label: 'Sifon Grubu' , value:'siphon' },
+        { id: 9, label: 'Batarya Musluk Grubu' , value:'faucet' },
+        { id: 10, label: 'Hortum Grubu' , value:'hose' },
+        { id: 11, label: 'Fittings Sarı Grubu' , value:'fittings' },
+        { id: 12, label: 'Flex Conta Grubu' , value:'conta' },
+        { id: 13, label: 'Aksesuar ve Yedek Parça Grubu' , value:'accessory' },
+        { id: 14, label: 'Diğer' , value:'other' },
+    ];
+
     const clearAll = () => {
 
-        setCategory(null)
+        setCategoryId(null)
         setProductsName("")
         setProductsModel("")
         setProductsPrice("")
@@ -49,7 +67,7 @@ const ProductsProcess = () => {
 
         const data = {
             category: {
-                id: category
+                id: categoryId
             },
             productsName,
             productsModel,
@@ -104,10 +122,10 @@ const ProductsProcess = () => {
                 <span className="p-float-label">
                     <Dropdown
                         className="m-2 w-16rem"
-                        value={category} options={""}
-                        optionLabel="title" optionValue='id'
-                        onChange={(e) => setCategory(e.target.value)}
-                        placeholder='Kategori Seçiniz'
+                        value={categoryId} options={categories}
+                        optionLabel="label" optionValue='id'
+                        onChange={(e) => setCategoryId(e.target.value)}
+                        placeholder='Kategori Seçiniz'  disabled={isUpdate}
                     />
                 </span>
             </div>
