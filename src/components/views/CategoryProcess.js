@@ -1,5 +1,6 @@
 import React, {useState,useEffect,useRef} from "react";
 import {CategoryService} from "../service/CategoryService";
+import { useHistory } from "react-router-dom";
 import {Toast} from "primereact/toast";
 import {Button} from "primereact/button";
 import closetPng from "../icons/closet.png"
@@ -7,7 +8,7 @@ import paintPng from "../icons/paint.png"
 import valvePng from "../icons/valve.png"
 import showerPng from "../icons/shower.png"
 import toolPng from  "../icons/tools.png"
-import electiricPng from  "../icons/electric.png"
+import electricPng from  "../icons/electric.png"
 import vitrifiyePng from  "../icons/vitrifiye.png"
 import siphonPng from  "../icons/siphon.png"
 import faucetPng from  "../icons/faucet.png"
@@ -24,7 +25,10 @@ const CategoryProcess = () => {
 
     const [category, setCategory] = useState(null);
     const [categoryId, setCategoryId] = useState(null);
+    const history = useHistory();
     //const [categoryList, setCategoryList] = useState([])
+
+
     const categoryService = new CategoryService();
 
     /*useEffect(() => {
@@ -39,12 +43,9 @@ const CategoryProcess = () => {
         }
     }
 
-    const categoryList = [
-        { id: 1, name: 'Category 1' },
-        { id: 2, name: 'Category 2' },
-        { id: 3, name: 'Category 3' },
-    ];
-
+    const handleButtonClick = (categoryId) => {
+        history.push("/products", { categoryId });
+    };
 
     return(
 
@@ -52,7 +53,9 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button
+                        onClick={() => handleButtonClick("closet")}
+                    >
                        <img src={closetPng} title="Klozet Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -93,7 +96,7 @@ const CategoryProcess = () => {
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
                     <Button>
-                        <img src={electiricPng} title="Elektirik Grubu" width="150px" height="150px"/>
+                        <img src={electricPng} title="Elektirik Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
             </div>
@@ -161,7 +164,6 @@ const CategoryProcess = () => {
                     </Button>
                 </div>
             </div>
-
 
         </div>
     )
