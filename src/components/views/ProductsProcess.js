@@ -7,6 +7,7 @@ import {Button} from "primereact/button";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import {ProductsService} from "../service/ProductsService";
+import {useLocation} from "react-router-dom";
 
 
 const ProductsProcess = () => {
@@ -17,12 +18,16 @@ const ProductsProcess = () => {
 
     const productService = new ProductsService();
 
-    const [categoryId, setCategoryId] = useState(null);
     const [selectedValue, setSelectedValue] = useState("");
     const [productsName, setProductsName] = useState(null);
     const [productsModel, setProductsModel] = useState(null);
     const [productsPrice, setProductsPrice] = useState(null);
     const [productsDetail, setProductsDetail] = useState(null);
+    const [categoryId, setCategoryId] = useState(null);
+    const [handleDropdownChange, setHandleDropdownChange] = useState(null);
+
+    const location = useLocation();
+    const categoryIdd = location.state?.categoryId;
 
     const [productsList, setProductsList] = useState([]);
 
@@ -56,7 +61,6 @@ const ProductsProcess = () => {
 
     const clearAll = () => {
 
-        setCategoryId(null)
         setProductsName("")
         setProductsModel("")
         setProductsPrice("")
@@ -122,7 +126,7 @@ const ProductsProcess = () => {
                 <span className="p-float-label">
                     <Dropdown
                         className="m-2 w-16rem"
-                        value={categoryId} options={categories}
+                        onChange={handleDropdownChange} options={categories}
                         optionLabel="label" optionValue='id'
                         onChange={(e) => setCategoryId(e.target.value)}
                         placeholder='Kategori Seçiniz'  disabled={isUpdate}

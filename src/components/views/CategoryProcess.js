@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from "react";
 import {CategoryService} from "../service/CategoryService";
-import { useHistory } from "react-router-dom";
+import { useHistory , useLocation } from "react-router-dom";
 import {Toast} from "primereact/toast";
 import {Button} from "primereact/button";
 import closetPng from "../icons/closet.png"
@@ -22,9 +22,9 @@ import otherPng from "../icons/other.png"
 const CategoryProcess = () => {
 
     const toast = useRef(null)
-
     const [category, setCategory] = useState(null);
-    const [categoryId, setCategoryId] = useState(null);
+
+
     const history = useHistory();
     //const [categoryList, setCategoryList] = useState([])
 
@@ -54,9 +54,9 @@ const CategoryProcess = () => {
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
                     <Button
-                        onClick={() => handleButtonClick("closet")}
+                        onClick={() => handleButtonClick("1")}
                     >
-                       <img src={closetPng} title="Klozet Grubu" width="150px" height="150px"/>
+                        <img src={closetPng} title="Klozet Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
             </div>
