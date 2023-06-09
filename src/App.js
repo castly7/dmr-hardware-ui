@@ -23,6 +23,7 @@ import './assets/demo/flags/flags.css';
 import './assets/demo/Demos.scss';
 import './assets/layout/layout.scss';
 import './App.scss';
+import Category from "./components/pages/Category";
 
 
 const App = () => {
@@ -149,7 +150,7 @@ const App = () => {
         {
             label: 'Admin Panel', icon: 'pi pi-fw pi-sitemap',
             items: [
-                { label: 'Yeni Kategori', icon: 'pi pi-fw pi-plus-circle', to: '/category' },
+                { label: 'Kategoriler', icon: 'pi pi-fw pi-bars', to: '/category' },
                 { label: 'Yeni Ürün', icon: 'pi pi-fw pi-plus-circle', to: '/products' }
             ]
         },
@@ -198,6 +199,7 @@ const App = () => {
 
                     <Route path="/chart" render={() => <ChartDemo colorMode={layoutColorMode} location={location} />} />
                     <Route path="/products" render={() => <Products />} />
+                    <Route path="/category" render={() => <Category />} />
 
                 </div>
 
