@@ -3,5 +3,5 @@ export const pagePath = {
     GETBYID: '/getById',
     GETALL:'/getAll',
     Category:'/category',
-    Products:'products'
+    Products:'/products'
 }

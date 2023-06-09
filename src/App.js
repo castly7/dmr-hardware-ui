@@ -11,6 +11,7 @@ import { AppConfig } from './AppConfig';
 import Dashboard from './components/Dashboard';
 import ChartDemo from './components/ChartDemo';
 import Products from './components/pages/Products';
+//import Login from './pages/Login';
 
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
@@ -142,9 +143,9 @@ const App = () => {
 
     const menu = [
         {
-            label: 'Home',
+            label: 'ANASAYFA',
             items: [{
-                label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
+                label: 'Bilgi Tablo', icon: 'pi pi-fw pi-home', to: '/'
             }]
         },
         {
@@ -200,6 +201,7 @@ const App = () => {
                     <Route path="/chart" render={() => <ChartDemo colorMode={layoutColorMode} location={location} />} />
                     <Route path="/products" render={() => <Products />} />
                     <Route path="/category" render={() => <Category />} />
+                    
 
                 </div>
 

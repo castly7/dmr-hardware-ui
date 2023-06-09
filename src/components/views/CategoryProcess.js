@@ -44,7 +44,10 @@ const CategoryProcess = () => {
     }
 
     const handleButtonClick = (categoryId) => {
-        history.push("/products", { categoryId });
+        debugger
+        history.push({
+            pathname: '/products', state : {categoryId}
+        });
     };
 
     return(
@@ -53,9 +56,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button
-                        onClick={() => handleButtonClick("1")}
-                    >
+                    <Button onClick={() => handleButtonClick(1)}>
                         <img src={closetPng} title="Klozet Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -63,7 +64,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(2)}>
                         <img src={paintPng} title="Boya Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -71,7 +72,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(3)}>
                         <img src={valvePng} title="Vana Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -79,7 +80,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(4)}>
                         <img src={showerPng} title="Duş Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -87,7 +88,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(5)}>
                         <img src={toolPng} title="Hırdavat Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -95,7 +96,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(6)}>
                         <img src={electricPng} title="Elektirik Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -103,7 +104,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(7)}>
                         <img src={vitrifiyePng} title="Vitrifiye Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -111,7 +112,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(8)}>
                         <img src={siphonPng} title="Sifon Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -119,7 +120,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(9)}>
                         <img src={faucetPng} title="Batarya Musluk Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -127,7 +128,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(10)}>
                         <img src={hosePng} title="Hortum Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -135,7 +136,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(11)}>
                         <img src={fittingsPng} title="Fittings Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -143,7 +144,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(12)}>
                         <img src={contaPng} title="Flex ve Conta Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -151,7 +152,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(13)}>
                         <img src={accessoryPng} title="Aksesuar ve Yedek Parça Grubu" width="150px" height="150px"/>
                     </Button>
                 </div>
@@ -159,7 +160,7 @@ const CategoryProcess = () => {
 
             <div className="flex flex-wrap align-items-start">
                 <div className="m-2">
-                    <Button>
+                    <Button onClick={() => handleButtonClick(14)}>
                         <img src={otherPng} title="Diğer Ürünler" width="150px" height="150px"/>
                     </Button>
                 </div>

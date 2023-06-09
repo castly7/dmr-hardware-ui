@@ -8,6 +8,10 @@ import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import {ProductsService} from "../service/ProductsService";
 import {useLocation} from "react-router-dom";
+import { FileUpload } from 'primereact/fileupload';
+import { Image } from 'primereact/image';
+import {Divider} from "primereact/divider";
+import {wholeDivideDurations} from "@fullcalendar/core";
 
 
 const ProductsProcess = () => {
@@ -17,17 +21,21 @@ const ProductsProcess = () => {
     const [globalFilter, setGlobalFilter] = useState("");
 
     const productService = new ProductsService();
+    const location = useLocation();
 
     const [selectedValue, setSelectedValue] = useState("");
+    const [productsId, setProductsId] = useState(null);
     const [productsName, setProductsName] = useState(null);
     const [productsModel, setProductsModel] = useState(null);
     const [productsPrice, setProductsPrice] = useState(null);
     const [productsDetail, setProductsDetail] = useState(null);
-    const [categoryId, setCategoryId] = useState(null);
+    const [productsImage, setProductsImage]= useState("");
+    const [productsBroadcast, setProductsBroadcast] = useState("");
+    const [categoryId, setCategoryId] = useState(location.state?.categoryId  ? location.state?.categoryId : null);
     const [handleDropdownChange, setHandleDropdownChange] = useState(null);
 
-    const location = useLocation();
-    const categoryIdd = location.state?.categoryId;
+   // const categoryId = location.state?.categoryId;
+    debugger;
 
     const [productsList, setProductsList] = useState([]);
 
@@ -59,12 +67,19 @@ const ProductsProcess = () => {
         { id: 14, label: 'Diğer' , value:'other' },
     ];
 
+    const productsBroadcastStatus = [
+        { label: 'Yayında', value:"1"},
+        { label: 'Yayında Değil', value:"0"}
+    ]
+
     const clearAll = () => {
 
         setProductsName("")
         setProductsModel("")
         setProductsPrice("")
         setProductsDetail("")
+        setProductsImage("")
+        setProductsBroadcast("")
     }
 
     const saveProducts = async () => {
@@ -76,7 +91,8 @@ const ProductsProcess = () => {
             productsName,
             productsModel,
             productsPrice,
-            productsDetail
+            productsDetail,
+            productsImage
         };
         console.log(data)
 
@@ -97,7 +113,53 @@ const ProductsProcess = () => {
     }
     const updateProducts = () => {
 
+        const data = {
+            id: productsId,
+            category: {
+                id: categoryId
+            },
+            productsName,
+            productsModel,
+            productsPrice,
+            productsDetail,
+            productsImage
+        }
+
+        // const res = await productService.update(data);
+        // if (res.success) if (res.success) {
+        //     await getAllProducts();
+        //     clearAll();
+        //     toast.current.show({
+        //         severity: 'success',
+        //         summary: 'Ürün  Kaydedildi.',
+        //         detail: 'Ürün Başarıyla Kaydedildi',
+        //         life: 3000
+        //     });
+        // } else {
+        //     toast.current.show({severity: 'warn', summary: 'Hata!', detail: res.message, life: 3000});
+        // }
     }
+
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
+    
+      const handleFileUpload = async (e) => {
+        const file = e.files[0];
+        const base64 = await convertToBase64(file);
+        setProductsImage({ ...productsImage, productImageFile: base64 });
+      };
+
+      const reject = () => {};
 
     const header = (
         <div className="table-header">
@@ -120,16 +182,18 @@ const ProductsProcess = () => {
                 </h6>
             </div>
         <div className="formgroup-inline">
-
             <div className="col-md-4 p-md-4 m-3">
                 <label htmlFor="name" className="p-d-block ml-3">Kategori</label>
                 <span className="p-float-label">
                     <Dropdown
                         className="m-2 w-16rem"
-                        onChange={handleDropdownChange} options={categories}
+                        options={categories} value={categoryId}
                         optionLabel="label" optionValue='id'
-                        onChange={(e) => setCategoryId(e.target.value)}
-                        placeholder='Kategori Seçiniz'  disabled={isUpdate}
+                        onChange={(e) => {
+                            debugger
+                            setCategoryId(e.target.value)
+                        }}
+                        placeholder='Kategori Seçiniz'  
                     />
                 </span>
             </div>
@@ -143,6 +207,10 @@ const ProductsProcess = () => {
                     />
                 </span>
             </div>
+
+           </div>
+
+            <div className="formgroup-inline">
 
             <div className="col-md-4 p-md-4 m-3">
                 <label htmlFor="name" className="p-d-block ml-3">Ürün Marka</label>
@@ -166,6 +234,8 @@ const ProductsProcess = () => {
 
             </div>
 
+            <div className="formgroup-inline">
+
             <div className="col-md-4 p-md-4 m-3">
                 <label htmlFor="name" className="p-d-block ml-3">Ürün Açıklaması</label>
                 <span className="p-float-label">
@@ -173,6 +243,36 @@ const ProductsProcess = () => {
                                value={productsDetail} placeHolder="Ürün Açıklaması Giriniz" rows={3}
                                onChange={(e) => setProductsDetail(e.target.value)}
                     />
+                </span>
+            </div>
+
+            <div className="col-md-4 p-md-4 m-3">
+                <label htmlFor="name" className="p-d-block ml-3">Ürün Yayın Durumu</label>
+                <span className="p-float-label">
+                    <Dropdown
+                        className="m-2 w-16rem" value={productsBroadcast}
+                        options={productsBroadcastStatus}
+                        optionLabel="label" optionValue='value'
+                        onChange={(e) => setProductsBroadcast(e.target.value)}
+                        placeholder='Yayın Durumunu Seçiniz'  
+                    />
+                </span>
+            </div>
+                       
+            </div>
+            
+            <div className="col-md-4 p-md-4 m-3">
+                <label htmlFor="name" className="p-d-block ml-3">Ürün Görseli</label>
+                <span className="p-float-label">
+                     <FileUpload mode="basic" className="ml-2"
+                                 chooseLabel="Görsel Seç"
+                                 name="demo[]"
+                                 url=""
+                                 accept="image/*"
+                                 maxFileSize={1000000}
+                                 onSelect={handleFileUpload}
+                     />
+                    
                 </span>
             </div>
 
@@ -197,20 +297,28 @@ const ProductsProcess = () => {
                 />}
             </div>
 
-            <div className="datatable-templating-demo mt-5 ml-3">
-                    <DataTable value={productsList} header={header}  responsiveLayout="scroll"
-                    emptyMessage="Ürün Bulunamadı.">
-                        <Column field="id" header="ID"></Column>
-                        <Column field="category.categoryName" header="Kategori"></Column>
-                        <Column field="productsName" header="Ürün Adı"></Column>
-                        <Column field="productsModel" header="Ürün Modeli"></Column>
-                        <Column field="productsPrice" header="Ürün Fiyatı"></Column>
-                        <Column field="productsDetail" header="Ürün Açıklaması"></Column>
-                    </DataTable>
-            </div>
+            <div className="col-12 formgroup-inline">
+
+                <div className="card">
+                    <Image src={productsImage.productImageFile} alt="Ürün Görseli" width="500" preview />
+                </div>
 
             </div>
-)
+
+
+                <DataTable value={productsList} header={header}  responsiveLayout="scroll"
+                           emptyMessage="Ürün Bulunamadı.">
+                    <Column field="id" header="ID"></Column>
+                    <Column field="category.categoryName" header="Kategori"></Column>
+                    <Column field="productsName" header="Ürün Adı"></Column>
+                    <Column field="productsModel" header="Ürün Modeli"></Column>
+                    <Column field="productsPrice" header="Ürün Fiyatı"></Column>
+                    <Column field="productsDetail" header="Ürün Açıklaması"></Column>
+                    <Column field="productsBroadcast" header="Ürün Yayın Durumu"></Column>
+                </DataTable>
+
+                </div>
+        )
 }
 
 export default ProductsProcess;
