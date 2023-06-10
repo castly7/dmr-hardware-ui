@@ -10,8 +10,6 @@ import {ProductsService} from "../service/ProductsService";
 import {useLocation} from "react-router-dom";
 import { FileUpload } from 'primereact/fileupload';
 import { Image } from 'primereact/image';
-import {Divider} from "primereact/divider";
-import {wholeDivideDurations} from "@fullcalendar/core";
 
 
 const ProductsProcess = () => {
@@ -20,7 +18,7 @@ const ProductsProcess = () => {
     const [isUpdate, setIsUpdate] = useState(false);
     const [globalFilter, setGlobalFilter] = useState("");
 
-    const productService = new ProductsService();
+    const productsService = new ProductsService();
     const location = useLocation();
 
     const [selectedValue, setSelectedValue] = useState("");
@@ -33,22 +31,18 @@ const ProductsProcess = () => {
     const [productsBroadcast, setProductsBroadcast] = useState("");
     const [categoryId, setCategoryId] = useState(location.state?.categoryId  ? location.state?.categoryId : null);
     const [handleDropdownChange, setHandleDropdownChange] = useState(null);
-
-   // const categoryId = location.state?.categoryId;
-    debugger;
-
     const [productsList, setProductsList] = useState([]);
 
-    /*useEffect(() => {
-        getAllProducts()
+    useEffect(() => {
+        all()
     }, []);
 
-    const getAllProducts = async () => {
-        const response = await productsService.getAll();  //getById
+    const all = async () => {
+        const response = await productsService.all();
         if (response.success) {
             setProductsList(response.object)
         }
-    }*/
+    }
 
     const categories = [
         { id: 1, label: 'Klozet Grubu' , value:'closet' },
@@ -82,36 +76,37 @@ const ProductsProcess = () => {
         setProductsBroadcast("")
     }
 
-    const saveProducts = async () => {
+   const saveProducts = async () => {
 
         const data = {
             category: {
                 id: categoryId
             },
-            productsName,
-            productsModel,
-            productsPrice,
-            productsDetail,
-            productsImage
+            name : productsName,
+            brand: productsModel,
+            price : productsPrice,
+            description:productsDetail,
+            //productsImage
         };
         console.log(data)
 
-        // const res = await productService.save(data);
-        // if (res.success) if (res.success) {
-        //     await getAllProducts();
-        //     clearAll();
-        //     toast.current.show({
-        //         severity: 'success',
-        //         summary: 'Ürün  Kaydedildi.',
-        //         detail: 'Ürün Başarıyla Kaydedildi',
-        //         life: 3000
-        //     });
-        // } else {
-        //     toast.current.show({severity: 'warn', summary: 'Hata!', detail: res.message, life: 3000});
-        // }
+        const res = await productsService.save(data);
+        if (res.success) if (res.success) {
+            await all();
+            clearAll();
+            toast.current.show({
+                severity: 'success',
+                summary: 'Ürün  Kaydedildi.',
+                detail: 'Ürün Başarıyla Kaydedildi',
+                life: 3000
+            });
+        } else {
+            toast.current.show({severity: 'warn', summary: 'Hata!', detail: res.message, life: 3000});
+        }
 
     }
-    const updateProducts = () => {
+
+    /*const updateProducts = () => {
 
         const data = {
             id: productsId,
@@ -125,20 +120,20 @@ const ProductsProcess = () => {
             productsImage
         }
 
-        // const res = await productService.update(data);
-        // if (res.success) if (res.success) {
-        //     await getAllProducts();
-        //     clearAll();
-        //     toast.current.show({
-        //         severity: 'success',
-        //         summary: 'Ürün  Kaydedildi.',
-        //         detail: 'Ürün Başarıyla Kaydedildi',
-        //         life: 3000
-        //     });
-        // } else {
-        //     toast.current.show({severity: 'warn', summary: 'Hata!', detail: res.message, life: 3000});
-        // }
-    }
+        const res = await productService.update(data);
+        if (res.success) if (res.success) {
+            await findAll();
+            clearAll();
+            toast.current.show({
+                severity: 'success',
+                summary: 'Ürün  Kaydedildi.',
+                detail: 'Ürün Başarıyla Kaydedildi',
+                life: 3000
+            });
+        } else {
+            toast.current.show({severity: 'warn', summary: 'Hata!', detail: res.message, life: 3000});
+        }
+    }*/
 
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -182,11 +177,12 @@ const ProductsProcess = () => {
             </div>
             <div className="formgroup-inline">
                 <div className="col-md-4 p-md-4 m-3">
-                    <label htmlFor="name" className="p-d-block ml-3">Kategori</label>
+                    <label className="p-d-block ml-3">Kategori</label>
                     <span className="p-float-label">
-                   <InputText id="username" className="m-2 w-16rem"
-                              value={productsName} placeholder="Ürün İsmi Giriniz..."
-                              onChange={(e) => setProductsName(e.target.value)}
+                   <Dropdown  className="m-2 w-16rem" options={categories}
+                              value={categoryId} placeholder="Kategori Seçiniz..."
+                              optionValue="id" optionLabel="label"
+                              onChange={(e) => setCategoryId(e.target.value)}
                    />
                 </span>
                 </div>
@@ -294,14 +290,14 @@ const ProductsProcess = () => {
                 {isUpdate &&<Button
                     title="Güncelle" label="Güncelle"
                     className="p-button-raised p-button-success m-2"
-                    onClick={updateProducts}
+                    onClick={"updateProducts"}
                 />}
             </div>
 
 
 
 
-            <DataTable value={productsList} header={header}  responsiveLayout="scroll"
+            <DataTable value={""} header={header}  responsiveLayout="scroll"
                        emptyMessage="Ürün Bulunamadı.">
                 <Column field="id" header="ID"></Column>
                 <Column field="category.categoryName" header="Kategori"></Column>

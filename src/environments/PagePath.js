@@ -1,7 +1,7 @@
 export const pagePath = {
     SAVE:'/save',
     GETBYID: '/getById',
-    GETALL:'/getAll',
+    FINDALL:'/findAll',
     Category:'/category',
-    Products:'/products'
+    Products:'/product'
 }

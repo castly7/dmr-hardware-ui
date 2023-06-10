@@ -26,20 +26,21 @@ const CategoryProcess = () => {
 
 
     const history = useHistory();
-    //const [categoryList, setCategoryList] = useState([])
+    const [categoryList, setCategoryList] = useState([])
 
 
     const categoryService = new CategoryService();
 
-    /*useEffect(() => {
-        getAllCategory();
-    }, []);*/
+    useEffect(() => {
+        all();
+    }, []);
 
-    const getAllCategory = async () => {
-        const res = await categoryService.getAll();
+
+    const all = async () => {
+        const res = await categoryService.all();
         console.log(res.object)
         if (res.succes) {
-            //setCategoryList(res.object)
+            setCategoryList(res.object)
         }
     }
 

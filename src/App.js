@@ -46,16 +46,6 @@ const App = () => {
     let mobileTopbarMenuClick = false;
 
     useEffect(() => {
-        const apiurl = "http://localhost:8080/api/category/all";
-        axios
-            .get(apiurl,{auth : {username:'admin',password:'123'}})
-            .then((response) => response.data)
-            .then((data) => {
-
-            });
-    }, [])
-
-    useEffect(() => {
         if (mobileMenuActive) {
             addClass(document.body, "body-overflow-hidden");
         } else {

@@ -5,8 +5,8 @@ export class CategoryService {
     _apiService = new ApiService();
 
 
-    getAll(){
-        return this._apiService.get(pagePath.Category+'/getAll').then(res => res)
+    all(){
+        return this._apiService.get(pagePath.Category+'/all').then(res => res)
     }
 
 
