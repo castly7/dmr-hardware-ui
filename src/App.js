@@ -25,6 +25,7 @@ import './assets/demo/Demos.scss';
 import './assets/layout/layout.scss';
 import './App.scss';
 import Category from "./components/pages/Category";
+import axios from "axios";
 
 
 const App = () => {
@@ -43,6 +44,16 @@ const App = () => {
 
     let menuClick = false;
     let mobileTopbarMenuClick = false;
+
+    useEffect(() => {
+        const apiurl = "http://localhost:8080/api/category/all";
+        axios
+            .get(apiurl,{auth : {username:'admin',password:'123'}})
+            .then((response) => response.data)
+            .then((data) => {
+
+            });
+    }, [])
 
     useEffect(() => {
         if (mobileMenuActive) {

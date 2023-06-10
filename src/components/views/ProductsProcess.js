@@ -173,7 +173,6 @@ const ProductsProcess = () => {
 
 
     return (
-
         <div className="cold-12">
             <Toast ref={toast} />
             <div className="text-left p-text-normal text-xl mt-3">
@@ -181,86 +180,83 @@ const ProductsProcess = () => {
                     Ürün Ekleme Ekranı
                 </h6>
             </div>
-        <div className="formgroup-inline">
-            <div className="col-md-4 p-md-4 m-3">
-                <label htmlFor="name" className="p-d-block ml-3">Kategori</label>
-                <span className="p-float-label">
-                    <Dropdown
-                        className="m-2 w-16rem"
-                        options={categories} value={categoryId}
-                        optionLabel="label" optionValue='id'
-                        onChange={(e) => {
-                            debugger
-                            setCategoryId(e.target.value)
-                        }}
-                        placeholder='Kategori Seçiniz'  
-                    />
+            <div className="formgroup-inline">
+                <div className="col-md-4 p-md-4 m-3">
+                    <label htmlFor="name" className="p-d-block ml-3">Kategori</label>
+                    <span className="p-float-label">
+                   <InputText id="username" className="m-2 w-16rem"
+                              value={productsName} placeholder="Ürün İsmi Giriniz..."
+                              onChange={(e) => setProductsName(e.target.value)}
+                   />
                 </span>
-            </div>
+                </div>
 
-            <div className="col-md-4 p-md-4 m-3">
-                <label htmlFor="name" className="p-d-block ml-3">Ürün İsmi</label>
-                <span className="p-float-label">
+                <div className="col-md-4 p-md-4 m-3">
+                    <label htmlFor="name" className="p-d-block ml-3">Ürün İsmi</label>
+                    <span className="p-float-label">
                     <InputText id="username" className="m-2 w-16rem"
                                value={productsName} placeholder="Ürün İsmi Giriniz..."
                                onChange={(e) => setProductsName(e.target.value)}
                     />
                 </span>
-            </div>
+                </div>
 
-           </div>
+
+
+            </div>
 
             <div className="formgroup-inline">
 
-            <div className="col-md-4 p-md-4 m-3">
-                <label htmlFor="name" className="p-d-block ml-3">Ürün Marka</label>
-                <span className="p-float-label">
+                <div className="col-md-4 p-md-4 m-3">
+                    <label htmlFor="name" className="p-d-block ml-3">Ürün Marka</label>
+                    <span className="p-float-label">
                     <InputText id="username" className="m-2 w-16rem"
                                value={productsModel} placeholder="Ürün Markası Giriniz..."
                                onChange={(e) => setProductsModel(e.target.value)}
                     />
                 </span>
-            </div>
+                </div>
 
-            <div className="col-md-4 p-md-4 m-3">
-                <label htmlFor="name" className="p-d-block ml-3">Ürün Fiyat</label>
-                <span className="p-float-label">
+                <div className="col-md-4 p-md-4 m-3">
+                    <label htmlFor="name" className="p-d-block ml-3">Ürün Fiyat</label>
+                    <span className="p-float-label">
                     <InputText id="username" className="m-2 w-16rem" placeholder="Ürün Fiyatı Giriniz..."
                                value={productsPrice} placeHolder="Ürün Fiyatı"
                                onChange={(e) => setProductsPrice(e.target.value)}
                     />
                 </span>
-            </div>
+                </div>
 
             </div>
 
             <div className="formgroup-inline">
 
-            <div className="col-md-4 p-md-4 m-3">
-                <label htmlFor="name" className="p-d-block ml-3">Ürün Açıklaması</label>
-                <span className="p-float-label">
+                <div className="col-md-4 p-md-4 m-3">
+                    <label htmlFor="name" className="p-d-block ml-3">Ürün Açıklaması</label>
+                    <span className="p-float-label">
                     <InputTextarea id="username" className="m-2 w-16rem" placeholder="Ürün Açıklaması Giriniz..."
-                               value={productsDetail} placeHolder="Ürün Açıklaması Giriniz" rows={3}
-                               onChange={(e) => setProductsDetail(e.target.value)}
+                                   value={productsDetail} placeHolder="Ürün Açıklaması Giriniz" rows={3}
+                                   onChange={(e) => setProductsDetail(e.target.value)}
                     />
                 </span>
-            </div>
+                </div>
 
-            <div className="col-md-4 p-md-4 m-3">
-                <label htmlFor="name" className="p-d-block ml-3">Ürün Yayın Durumu</label>
-                <span className="p-float-label">
+                <div className="col-md-4 p-md-4 m-3">
+                    <label htmlFor="name" className="p-d-block ml-3">Ürün Yayın Durumu</label>
+                    <span className="p-float-label">
                     <Dropdown
                         className="m-2 w-16rem" value={productsBroadcast}
                         options={productsBroadcastStatus}
                         optionLabel="label" optionValue='value'
                         onChange={(e) => setProductsBroadcast(e.target.value)}
-                        placeholder='Yayın Durumunu Seçiniz'  
+                        placeholder='Yayın Durumunu Seçiniz'
                     />
                 </span>
+                </div>
+
             </div>
-                       
-            </div>
-            
+
+            <div className="formgroup-inline">
             <div className="col-md-4 p-md-4 m-3">
                 <label htmlFor="name" className="p-d-block ml-3">Ürün Görseli</label>
                 <span className="p-float-label">
@@ -272,8 +268,13 @@ const ProductsProcess = () => {
                                  maxFileSize={1000000}
                                  onSelect={handleFileUpload}
                      />
-                    
                 </span>
+            </div>
+
+            <div className="col-md-4 p-md-4 m-3 mt-6 ml-8">
+                <Image src={productsImage.productImageFile} alt="Ürün Görseli" width="150" preview />
+            </div>
+
             </div>
 
             <div className="formgroup-inline ml-3 mt-4">
@@ -297,28 +298,22 @@ const ProductsProcess = () => {
                 />}
             </div>
 
-            <div className="col-12 formgroup-inline">
-
-                <div className="card">
-                    <Image src={productsImage.productImageFile} alt="Ürün Görseli" width="500" preview />
-                </div>
-
-            </div>
 
 
-                <DataTable value={productsList} header={header}  responsiveLayout="scroll"
-                           emptyMessage="Ürün Bulunamadı.">
-                    <Column field="id" header="ID"></Column>
-                    <Column field="category.categoryName" header="Kategori"></Column>
-                    <Column field="productsName" header="Ürün Adı"></Column>
-                    <Column field="productsModel" header="Ürün Modeli"></Column>
-                    <Column field="productsPrice" header="Ürün Fiyatı"></Column>
-                    <Column field="productsDetail" header="Ürün Açıklaması"></Column>
-                    <Column field="productsBroadcast" header="Ürün Yayın Durumu"></Column>
-                </DataTable>
 
-                </div>
-        )
+            <DataTable value={productsList} header={header}  responsiveLayout="scroll"
+                       emptyMessage="Ürün Bulunamadı.">
+                <Column field="id" header="ID"></Column>
+                <Column field="category.categoryName" header="Kategori"></Column>
+                <Column field="productsName" header="Ürün Adı"></Column>
+                <Column field="productsModel" header="Ürün Modeli"></Column>
+                <Column field="productsPrice" header="Ürün Fiyatı"></Column>
+                <Column field="productsDetail" header="Ürün Açıklaması"></Column>
+                <Column field="productsBroadcast" header="Ürün Yayın Durumu"></Column>
+            </DataTable>
+
+        </div>
+    );
 }
 
 export default ProductsProcess;
